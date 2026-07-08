@@ -176,7 +176,7 @@ class Orchestrator:
                 from app.services.fallback import infer_animation_type
 
                 anim_type = step.get("animation_type")
-                valid_types = {"solar_blast", "gravity_change", "black_hole", "projectile", "pendulum", "wave", "doppler", "orbital", "electric_field", "collision", "spring", "quantum_wave", "gravitational_field", "atom", "nuclear", "custom", "code"}
+                valid_types = {"solar_blast", "gravity_change", "black_hole", "projectile", "pendulum", "wave", "doppler", "orbital", "electric_field", "collision", "spring", "quantum_wave", "gravitational_field", "atom", "nuclear", "custom", "code", "3d_code"}
                 
                 if not anim_type or anim_type not in valid_types:
                     text = " ".join(
