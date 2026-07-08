@@ -1,0 +1,2 @@
+powershell -ExecutionPolicy Bypass -File .\start-all.ps1
+powershell -ExecutionPolicy Bypass -File .\stop-all.ps1
