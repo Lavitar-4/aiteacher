@@ -69,7 +69,7 @@ RULES:
 - The `sdk` object has powerful methods: `sdk.createSphere(radius, mass, color, {x,y,z})`, `sdk.createBox(w, h, d, mass, color, {x,y,z})`, and `sdk.createFloor(color)`.
 - Use `_ctx` to initialize things once: 
   `if (!_ctx.init) { _ctx.init=true; sdk.createFloor(0x223344); _ctx.ball = sdk.createSphere(1, 5, 0xff0000, {x:0, y:10, z:0}); }`
-- INTERACTIVE SLIDERS: You can read sliders using `S.SliderName` (e.g. `let g = S.Gravity;`). The frontend will automatically detect and create these sliders if you define them in the return JSON (handled separately). For now, just use them safely: `let speed = S.Speed || 1;`
+- INTERACTIVE SLIDERS: You can read sliders using `S.SliderName` (e.g. `let g = S.Gravity;`). The frontend will automatically detect and create these sliders if you define them in the code. For now, just use them safely: `let speed = S.Speed || 1;`
 - DO NOT use `window.sun = ...` or `if (t === 0) { ... }` — these cause crashes! Use `_ctx.init`.
 - DO NOT setup lighting, cameras, or controls. They are already provided.
 

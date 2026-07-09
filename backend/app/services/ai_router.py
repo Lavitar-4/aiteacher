@@ -50,13 +50,21 @@ class GeminiRouter:
             f"Topic: {topic or 'unknown'}",
             f"Student message: {student_msg or 'n/a'}",
             "",
-            "Return pure JSON array only. Each array item must be a step object.",
-            "You MUST provide DEEP, ACCURATE, and COMPLETE physics explanations.",
-            "If an animation is shown, explicitly explain what is happening inside the animation and how it relates to the physics concept.",
+        ]
+        
+        if task not in {"animate", "critic"}:
+            lines.extend([
+                "Return pure JSON array only. Each array item must be a step object.",
+                "You MUST provide DEEP, ACCURATE, and COMPLETE physics explanations.",
+                "If an animation is shown, explicitly explain what is happening inside the animation and how it relates to the physics concept.",
+            ])
+            
+        lines.extend([
             "NEVER cut off your response prematurely.",
             "",
             "Conversation context:",
-        ]
+        ])
+        
         for item in messages:
             role = str(item.get("role", "user")).upper()
             content = str(item.get("content", "")).strip()
