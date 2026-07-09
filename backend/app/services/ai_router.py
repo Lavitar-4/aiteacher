@@ -107,8 +107,10 @@ class GeminiRouter:
         trimmed = self._trim_messages(messages)
         prompt = self._compose_prompt(system, trimmed, task, topic, student_msg)
         
+        force_json = task not in {"animate", "critic"}
+        
         try:
-            text = await self.provider.complete([{"role": "user", "content": prompt}], "", image)
+            text = await self.provider.complete([{"role": "user", "content": prompt}], "", image, force_json=force_json)
             return RouterResult(
                 text=text,
                 route="gemini_main",

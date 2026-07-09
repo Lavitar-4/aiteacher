@@ -60,7 +60,7 @@ class GeminiProvider:
         if last_error:
             raise last_error
 
-    async def complete(self, messages: list[dict], system: str, image: str | None = None) -> str:
+    async def complete(self, messages: list[dict], system: str, image: str | None = None, force_json: bool = True) -> str:
         contents = []
         for msg in messages:
             role = "user" if msg.get("role") == "user" else "model"
@@ -74,11 +74,14 @@ class GeminiProvider:
             if contents:
                 contents[-1].parts.append(types.Part.from_bytes(data=image_bytes, mime_type=mime_type))
             
-        config = types.GenerateContentConfig(
-            system_instruction=system or None,
-            temperature=0.2,
-            response_mime_type="application/json"
-        )
+        config_kwargs = {
+            "system_instruction": system or None,
+            "temperature": 0.2,
+        }
+        if force_json:
+            config_kwargs["response_mime_type"] = "application/json"
+            
+        config = types.GenerateContentConfig(**config_kwargs)
         last_error = None
         
         for model in self.models:
